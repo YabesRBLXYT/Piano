@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Piano</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #333;
+        }
+
+        .piano {
+            display: flex;
+            position: relative;
+        }
+
+        .key {
+            border: 1px solid #000;
+            height: 200px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .white {
+            width: 60px;
+            background-color: white;
+            z-index: 1;
+        }
+
+        .black {
+            width: 40px;
+            background-color: black;
+            position: absolute;
+            height: 120px;
+            margin-left: -20px;
+            z-index: 2;
+        }
+
+        .key:active {
+            transform: scale(0.95);
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="piano">
+        <div class="key white" data-note="C"></div>
+        <div class="key black" data-note="C#"></div>
+        <div class="key white" data-note="D"></div>
+        <div class="key black" data-note="D#"></div>
+        <div class="key white" data-note="E"></div>
+        <div class="key white" data-note="F"></div>
+        <div class="key black" data-note="F#"></div>
+        <div class="key white" data-note="G"></div>
+        <div class="key black" data-note="G#"></div>
+        <div class="key white" data-note="A"></div>
+        <div class="key black" data-note="A#"></div>
+        <div class="key white" data-note="B"></div>
+        <div class="key white" data-note="C2"></div>
+    </div>
+
+    <script>
+        const notes = {
+            'C': 'sounds/C.ogg',
+            'C#': 'sounds/C#.ogg',
+            'D': 'sounds/D.ogg',
+            'D#': 'sounds/D#.ogg',
+            'E': 'sounds/E.ogg',
+            'F': 'sounds/F.ogg',
+            'F#': 'sounds/F#.ogg',
+            'G': 'sounds/G.ogg',
+            'G#': 'sounds/G#.ogg',
+            'A': 'sounds/A.ogg',
+            'A#': 'sounds/A#.ogg',
+            'B': 'sounds/B.ogg',
+            'C2': 'sounds/C2.ogg',
+        };
+
+        function playNote(note) {
+            const audio = new Audio(notes[note]);
+            audio.play();
+        }
+
+        document.querySelectorAll('.key').forEach(key => {
+            key.addEventListener('click', () => {
+                const note = key.getAttribute('data-note');
+                playNote(note);
+            });
+        });
+    </script>
+</body>
+          </html>
+          
