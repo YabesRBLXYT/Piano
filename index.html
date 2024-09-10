@@ -24,21 +24,44 @@
             height: 200px;
             cursor: pointer;
             display: inline-block;
+            position: relative;
+            z-index: 1;
         }
 
         .white {
             width: 60px;
             background-color: white;
-            z-index: 1;
         }
 
         .black {
             width: 40px;
             background-color: black;
-            position: absolute;
             height: 120px;
+            position: absolute;
             margin-left: -20px;
             z-index: 2;
+            top: 0;
+        }
+
+        .white:nth-of-type(1) {
+            margin-left: 0;
+        }
+
+        /* Positioning black keys correctly between white keys */
+        .black[data-note="C#"] {
+            left: 40px;
+        }
+        .black[data-note="D#"] {
+            left: 100px;
+        }
+        .black[data-note="F#"] {
+            left: 220px;
+        }
+        .black[data-note="G#"] {
+            left: 280px;
+        }
+        .black[data-note="A#"] {
+            left: 340px;
         }
 
         .key:active {
@@ -83,16 +106,16 @@
 
         function playNote(note) {
             const audio = new Audio(notes[note]);
-            audio.play();
+            audio.play();  // Play sound once
         }
 
+        // Add click event listeners to each key
         document.querySelectorAll('.key').forEach(key => {
-            key.addEventListener('click', () => {
+            key.addEventListener('mousedown', () => {
                 const note = key.getAttribute('data-note');
                 playNote(note);
             });
         });
     </script>
 </body>
-          </html>
-          
+</html>
